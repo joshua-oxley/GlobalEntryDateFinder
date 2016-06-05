@@ -1,0 +1,26 @@
+{
+  "name": "global-entry-checker",
+  "version": "1.0.0",
+  "description": "Find new appointments on GOES website",
+  "main": "main.js",
+  "dependencies": {
+    "casperjs": "^1.1.1",
+    "sendgrid": "^2.0.0",
+    "spooky": "^0.2.5"
+  },
+  "devDependencies": {
+    "eslint": "^2.10.0",
+    "eslint-config-airbnb": "^9.0.1",
+    "eslint-plugin-import": "^1.8.0",
+    "eslint-plugin-jsx-a11y": "^1.2.0",
+    "eslint-plugin-react": "^5.1.1"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Jacob Mortensen",
+  "license": "ISC",
+  "globals": {
+    "casper": true
+  }
+}
