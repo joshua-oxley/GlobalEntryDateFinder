@@ -1,2 +1,2 @@
 const ScrapeGlobalEntry = require('./ScrapeGlobalEntry');
-ScrapeGlobalEntry.run();
+new ScrapeGlobalEntry();
