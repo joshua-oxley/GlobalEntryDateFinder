@@ -28,18 +28,17 @@ class GobalEntryScraper {
     });
 
     this.spooky.on('found', function(availableDays) {
-      console.log('found');
       console.log(`found:${availableDays}`);
-      // sendgrid.send({
-      //   to: config.EMAIL,
-      //   from: config.EMAIL,
-      //   subject: 'Global Entry Found Date',
-      //   text: availableDays.toString(),
-      // }, (err) => {
-      //   if (err) {
-      //     return console.error(err);
-      //   }
-      // });
+      sendgrid.send({
+        to: config.EMAIL,
+        from: config.EMAIL,
+        subject: 'Global Entry Found Date',
+        text: availableDays.toString(),
+      }, (err) => {
+        if (err) {
+          console.error(err);
+        }
+      });
     });
 
     this.spooky.on('not found', () => {
