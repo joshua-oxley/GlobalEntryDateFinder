@@ -5,7 +5,9 @@ const sendgrid = require('sendgrid')(config.SENGRID_KEY);
 const Spooky = require('spooky');
 
 class GobalEntryScraper {
-  constructor() {
+  constructor(airpotIndex, month) {
+    this.airportIndex = airpotIndex;
+    this.month = month;
     this.spooky = new Spooky({
       child: {
         transport: 'http',
@@ -53,9 +55,9 @@ class GobalEntryScraper {
       this.spooky.start(GLOBAL_ENTRY_START_URL);
       this.login();
       this.navigateToReschedule();
-      this.selectAirport(92); // SFO
+      this.selectAirport(this.airportIndex); // SFO
       // Set to 1st day of month- since we are viewing by month this doesn't matter
-      this.setMonthAndView(1, 1, 17);
+      this.setMonthAndView(this.month, 1);
       this.findAvailableDays();
       this.spooky.run();
     }
@@ -99,7 +101,8 @@ class GobalEntryScraper {
     this.spooky.thenClick('input[name="next"]');
   }
 
-  setMonthAndView(month, day, year) {
+  setMonthAndView(month, day) {
+    const year = this.getYearForMonth(month);
     this.spooky.thenEvaluate(function(month, day, year) {
       // Set month
       document.forms.scheduleForm.elements['scheduleForm:scheduleNavigator'].value
@@ -112,6 +115,16 @@ class GobalEntryScraper {
       day: day,
       year: year
     });
+  }
+
+  getYearForMonth(month) {
+    const today = new Date();
+    const currentMonth = today.getMonth + 1;
+    let currentYear = today.getFullYear();
+    if (month < currentMonth) {
+      currentYear += 1; // We want dates for next year
+    }
+    return currentYear.toString().substring(2, 4);
   }
 
   findAvailableDays() {
