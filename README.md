@@ -17,5 +17,5 @@ Where `[AirportSelectIndex]` is the index of the desired airport found [here](ht
 
 Ex for dates at SFO in June run:
 ```bash
-node run.js 92 6
+node run.js 90 6
 ```

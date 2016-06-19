@@ -94,7 +94,7 @@ class GobalEntryScraper {
 
   selectAirport(selectedIndex) {
     this.spooky.thenEvaluate(function(selectedIndex) {
-      document.querySelector('select').selectedIndex = selectedIndex;
+      document.querySelector('select[name="selectedEnrollmentCenter"]').selectedIndex = selectedIndex;
     }, {
       selectedIndex: selectedIndex
     });
